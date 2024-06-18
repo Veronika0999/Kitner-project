@@ -20,7 +20,6 @@ Pozitivní registrace - telefon s předčíslím
 
 Pozitivní registrace - pouze povinné položky
     API course registration    2   John    Doe     fyz     8966 Valley Farms Court Ozone Park      johndoe@bestemail.com       777123123       1       ${EMPTY}                  ${EMPTY}       200
-# když je v dokumentaci napsané, že komentář a souhlas jsou nepovinné položky, proč nemohu místo true nebo false dát jen empty u toho souhlasu?
 
 Negativní registrace - prázdné IČO
     API course registration    2   Jane    Doe     pra     ${EMPTY}                                 janedoe@bestemail.com       777444111       1       Looking forward to the course       false     500
