@@ -2,6 +2,7 @@
 Library     RequestsLibrary
 Library     String
 Library     Collections
+Library     DebugLibrary
 
 *** Variables ***
 ${url}      http://testovani.kitner.cz/
@@ -24,8 +25,6 @@ Unsuccessful login - bad password
 Unsuccessful login - bad name
     API course login    ffdasdfadf    tajneadmin     Chrome     403
 
-
-
 *** Keywords ***
 API course login
     [Arguments]         ${name}     ${pass}    ${useragent}     ${error_resp}
@@ -35,6 +34,11 @@ API course login
     &{header} =       Create Dictionary     Content-Type=application/json;charset=utf-8
     #&{header} =       Create Dictionary     Server=nginx/1.22.1
     #&{header} =       Create Dictionary     Date=Wed, 25 Apr 2024 04:54:58 GMT
+
+# Logování
+    Log                 header: &{header}       level=debug     formatter=repr
+    Log                 header: ${header}       level=debug     formatter=repr
+    Log                 header: ${header}       level=trace     formatter=repr
 
     ${resp} =      POST     ${urlapp}     data=${json}      expected_status=Anything    headers=${header}
     Log            ${resp.json()}
