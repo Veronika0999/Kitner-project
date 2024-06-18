@@ -1,5 +1,6 @@
 *** Settings ***
 Library  Browser
+Library  DebugLibrary
 
 Resource        Data_and_Config/Configuration.robot
 Resource        Data_and_Config/TestData.robot
@@ -12,6 +13,7 @@ Test Teardown   Po sadě
 
 *** Test Cases ***
 Registrace - úspěšná
+    Debug
     Registrace - úspěšná        ${USER1_EMAIL}                   ${USER1_PASSWORD}          ${USER1_NAME}       ano
 
 Registrace - neúspěšná
@@ -47,6 +49,10 @@ Registrace - neúspěšná
          Log To Console     Registrace nebyla úspěšná
          Get Text           ${SEL_LoginIncorrectEmail}    *=      ${ERROR_TEXT_EmptyEmail}
     END
+
+# Logování
+    Log       registrace: ${registration}     level=INFO
+    Log       registrace: ${registration}     level=DEBUG       formatter=repr
 
 Před sadou
        New Browser                  chromium            headless=False
