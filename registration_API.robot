@@ -2,6 +2,7 @@
 Library     RequestsLibrary
 Library     String
 Library     Collections
+Library     DebugLibrary
 
 *** Variables ***
 ${url}      http://testovani.kitner.cz/
@@ -36,6 +37,11 @@ API course registration
     ${json} =     Catenate    {"targetid":"","kurz":"${course}","name":"${name}","surname":"${surname}","person":"${person}","address":"${adresa_ico}", "ico":"${adresa_ico}", "email":"${email}","phone":"${phone}","count":"${count}","comment":"${comment}","souhlas":${consent}}
 
     ${json_utf8} =       Encode String To Bytes    ${json}    UTF-8
+
+# Logování
+    Log             Argument json: ${json_utf8}     TRACE
+    Log             Převod na UTF-8: ${json_utf8}   level=trace     formatter=repr
+    Log             Převod na UTF-8: ${json_utf8}   level=debug     formatter=repr
 
     ${response} =        POST     ${urlapp}        data=${json_utf8}        expected_status=Anything
     Log                  Responce: @{response}
